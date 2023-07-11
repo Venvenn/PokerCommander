@@ -54,6 +54,6 @@ public class Deck
             m_cardData[i].Id = i;
             m_deck.Push(i);
         }
-        m_deck = CardShuffleSystem.FisherYatesShuffle(m_deck, m_random.Random);
+        m_deck = CardShuffleSystem.FisherYatesShuffle(m_deck,ref m_random.Random);
     }
 }

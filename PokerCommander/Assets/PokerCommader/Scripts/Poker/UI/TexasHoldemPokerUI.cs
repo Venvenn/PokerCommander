@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Siren;
 using UnityEngine;
@@ -13,11 +14,16 @@ public class TexasHoldemPokerUI : FlowScreenUI
     [SerializeField]
     private CardHandUI m_handPrefab;
 
+    [SerializeField]
+    private CommandZoneUI m_commandZoneUi;
+    
+    
     private CardBack m_cardBack;
     private List<CardHandUI> m_cardHands = new List<CardHandUI>();
     
     public void InitUI(NationData playerNation, CombatCommanderData[] participants, CardBack cardBack)
     {
+        m_commandZoneUi.gameObject.SetActive(false);
         m_cardBack = cardBack;
         
         for (int i = 0; i < participants.Length; i++)
@@ -47,7 +53,22 @@ public class TexasHoldemPokerUI : FlowScreenUI
     {
         m_cardTable.SetCards(cardTable);
     }
+
+    public void EnableCommandZone()
+    {
+        m_commandZoneUi.gameObject.SetActive(true);
+    }
     
+    public void DisableCommandZone()
+    {
+        m_commandZoneUi.gameObject.SetActive(false);
+    }
+
+    public void Reset()
+    {
+        m_cardTable.ClearTable();
+    }
+
     public override void UpdateUI()
     {
     }

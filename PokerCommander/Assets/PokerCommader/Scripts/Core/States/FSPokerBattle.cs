@@ -22,6 +22,7 @@ public class FSPokerBattle : FlowState
     private PokerPhase m_currentPhase;
 
     private int m_dealChipId = -1;
+    private int m_currentBetId = -1;
     
     public FSPokerBattle(GameContext gameContext, BattleData battleData)
     {
@@ -37,7 +38,6 @@ public class FSPokerBattle : FlowState
         //Data 
         m_battleData = battleData;
         m_contentDatabase = gameContext.ContentDatabase;
-
         
         m_cardObjectPrefab = Resources.Load<GameObject>("Prefabs/BaseCard");
         m_cardData = Resources.Load<CardDataObject>("Data/CardData");
@@ -68,52 +68,98 @@ public class FSPokerBattle : FlowState
 
     public override void OnActive()
     {
+        m_currentBetId = m_dealChipId;
         RunRoundPhase();
     }
 
     public void RunRoundPhase()
     {
+        Debug.Log(m_currentPhase);
+        
         switch (m_currentPhase)
         {
             case PokerPhase.DealHands:
                 m_texasHoldemInteractionManager.DealHand();
                 m_ui.SetCardsInHands(m_texasHoldemInteractionManager.m_cardHand);
                 m_currentPhase = PokerPhase.Blinds;
+                RunRoundPhase();
                 break;
             case PokerPhase.Blinds:
                 PayBlinds();
                 m_currentPhase = PokerPhase.Preflop;
+                RunRoundPhase();
                 break;
             case PokerPhase.Preflop:
-                //Bet
+                EnterBetPhase();
                 break;
             case PokerPhase.Flop:
                 m_texasHoldemInteractionManager.DealFlop();
-                //Bet
+                m_ui.SetCardsInTable(m_texasHoldemInteractionManager.m_cardTable);
+                EnterBetPhase();
                 break;
             case PokerPhase.Turn:
                 m_texasHoldemInteractionManager.DealTurn();
-                //Bet
+                m_ui.SetCardsInTable(m_texasHoldemInteractionManager.m_cardTable);
+                EnterBetPhase();
                 break;
             case PokerPhase.River:
                 m_texasHoldemInteractionManager.DealRiver();
-                //Bet
+                m_ui.SetCardsInTable(m_texasHoldemInteractionManager.m_cardTable);
+                EnterBetPhase();
                 break;
             case PokerPhase.Reset:
-                
+                m_deck.ResetDeck();
+                m_ui.Reset();
+                m_texasHoldemInteractionManager.Reset();
+                m_currentPhase = PokerPhase.DealHands;
+                RunRoundPhase();
                 break;
         }
+        
+    }
+    
+    public void EnterBetPhase()
+    {
+        m_currentBetId = m_dealChipId;
+
+        for (int i = 0; i < m_participants.Length; i++)
+        {
+            m_participants[i].BetState = m_participants[i].ActiveInRound ? BetState.In : BetState.Out;
+        }
+
+        RunBetPhase();
     }
     
     public void RunBetPhase()
     {
-        //Player 
-        if (m_dealChipId == 0) 
+        bool stillIn = true;
+
+        while (stillIn)
         {
-            //Do nothing
+            stillIn = false;
+            for (int i = m_currentBetId; i < m_participants.Length - m_currentBetId; i++)
+            {
+                if (m_participants[i].ActiveInBet())
+                {
+                    stillIn = true;
+                    //Player 
+                    if (i == 0)
+                    {
+                        m_currentBetId = i;
+                        m_ui.EnableCommandZone();
+                        return;
+                    }
+
+                    //Temp Ai, Move On TODO: AI
+                    m_participants[m_currentBetId].BetState = BetState.Folded;
+                }
+            }
         }
-        
-        //Temp Ai
+
+
+        m_ui.DisableCommandZone();
+        m_currentPhase++;
+        RunRoundPhase();
     }
     
 
@@ -124,7 +170,40 @@ public class FSPokerBattle : FlowState
         
         //pay blinds
     }
-    
+
+    public override void ReceiveFlowMessages(object message)
+    {
+        switch (message)
+        {
+            case "raise":
+                m_participants[m_currentBetId].BetState = BetState.Raised;
+                AdvanceBet();
+                break;
+            case "check":
+                m_participants[m_currentBetId].BetState = BetState.Checked;
+                AdvanceBet();
+                break;
+            case "fold":
+                m_participants[m_currentBetId].BetState = BetState.Folded;
+                m_participants[m_currentBetId].ActiveInRound = false;
+                AdvanceBet();
+                break;
+            case "bet":
+                m_participants[m_currentBetId].BetState = BetState.Bet;
+                AdvanceBet();
+                break;
+            case "call":
+                m_participants[m_currentBetId].BetState = BetState.Called;
+                AdvanceBet();
+                break;
+        }
+    }
+
+    private void AdvanceBet()
+    {
+        m_currentBetId = PokerUtility.GetNextPlayerId(m_currentBetId, m_participants);
+        RunBetPhase();
+    }
     
     public override void ActiveUpdate()
     {

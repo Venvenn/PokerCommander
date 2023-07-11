@@ -9,7 +9,7 @@ public static class PokerUtility
         bool found = false;
         while (!found)
         {
-            currentPlayer = currentPlayer < participants.Length ? currentPlayer + 1 : 0;
+            currentPlayer = currentPlayer < participants.Length - 1 ? currentPlayer + 1 : 0;
 
             if (participants[currentPlayer].ActiveInRound)
             {

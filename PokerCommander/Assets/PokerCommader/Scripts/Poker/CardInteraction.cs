@@ -5,7 +5,8 @@ using UnityEngine;
 public class TexasHoldemInteractionManager
 {
     private const int k_cardsInHand = 2;
-    private const int k_flopSize = 2;
+    private const int k_flopSize = 3;
+    private const int k_tableTotalCards = 5;
     
     public CardHand[] m_cardHand;
     public CardTable m_cardTable;
@@ -15,6 +16,7 @@ public class TexasHoldemInteractionManager
     {
         m_deck = deck;
         m_cardHand = new CardHand[playerNum];
+        m_cardTable = new CardTable(k_tableTotalCards);
     }
     
     public void DealHand()
@@ -44,5 +46,11 @@ public class TexasHoldemInteractionManager
     {
         Card newCard = m_deck.DrawCard();
         m_cardTable.AddCard(newCard);
+    }
+
+    public void Reset()
+    {
+        m_cardHand = new CardHand[m_cardHand.Length];
+        m_cardTable = new CardTable(k_tableTotalCards);
     }
 }

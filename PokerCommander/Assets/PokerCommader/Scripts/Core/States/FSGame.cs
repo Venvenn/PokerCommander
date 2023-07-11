@@ -9,23 +9,12 @@ public class FSGame : FlowState
     private GameUI m_ui;
     private GameContext m_gameContext;
     private FlowStateMachine m_gameplayStates;
-
-    private Deck m_deck;
-    private TexasHoldemInteractionManager m_texasHoldemInteractionManager;
-
-    private GameObject m_cardObjectPrefab;
-    private CardDataObject m_cardData;
-
+    
     public FSGame(GameContext gameContext)
     {
         //UI
         m_gameContext = gameContext;
         m_gameplayStates = new FlowStateMachine(this);
-        m_deck = new Deck(m_gameContext.SeededRandom);
-        m_texasHoldemInteractionManager = new TexasHoldemInteractionManager(m_deck, k_playerNum);
-        
-        m_cardObjectPrefab = Resources.Load<GameObject>("Prefabs/BaseCard");
-        m_cardData = Resources.Load<CardDataObject>("Data/CardData");
     }
 
     public override void OnInitialise()

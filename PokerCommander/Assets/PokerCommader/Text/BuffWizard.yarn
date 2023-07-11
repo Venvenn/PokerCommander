@@ -1,0 +1,109 @@
+title: Start
+tags:
+---
+
+'The overwhelming scent of parsley and egg rolls into the room announcing the presence of the gigantic caster. His shoulders, like boulders. Too swole to control.'
+
+Buff Wizard: What ho, small creature! Let me pass. My robe is at the dry cleaners and I must make haste. I have a mighty hunger.
+
+<<jump Round1>>
+===
+text 
+title: Round1
+tags:
+---
+//Round 1:
+-> Hey there big guy! Whilst you're here, can I get you to help me move this sofa?
+    The Buff Wizard flexes hard
+    Buff Wizard: “Well well, these muscles aren't just for show!”
+    <<set $murderMeter = $murderMeter - 1>>
+-> You like lifting weights, but now you don't want to .. wait' around? Pretty Ironic, huh? Right? Huh? Okay…
+    The Buff Wizard crosses his arms
+    Buff Wizard:“Is this kobalt humor?”
+-> Quick question. Are you compensating for something?
+    The Buff Wizard starts to shake slightly 
+    Buff Wizard: What? No!
+    <<set $murderMeter = $murderMeter + 1>>
+
+<<jump Round2>>
+===
+
+title: Round2
+tags:
+---
+//Round 2:
+-> Hey brah, what's your bench? Bet you could like, bench three of me! Ha ha. 
+    Buff Wizard:“Only three? You underestimate my power, young kobalt! Ha ha!” 
+    He flexes again
+    <<set $murderMeter = $murderMeter - 1>>
+-> You must be in a hurry there Mr.Wizard, I can see your biceps shrinking as we speak!
+    Buff Wizard:“Don't joke about such things” 
+    The Buff Wizard shakes his head, beard trailing after. A tear rolls down his cheek.
+    <<set $murderMeter = $murderMeter + 1>>
+-> Why do you need to be so buff if you're a wizard anyway? 
+    Buff Wizard:“Urgh, you sound like my mother!”
+
+<<jump Round3>>
+===
+
+title: Round3
+tags:
+---
+//Round 3:
+-> You like Goblin chow? Let me recommend you a place! Tell them I sent ya.
+    The Buff Wizard rubs his hands together 
+    Buff Wizard:“Ooh! I could be tempted…”
+-> Hey, I think you might be getting a bit hangry.
+    Buff Wizard:“I AM NOT HANGRY!” 
+    <<set $murderMeter = $murderMeter - 1>>
+    The Buff Wizard yelled, hungrily and angrily
+-> So yeah you're buff, but can you touch your toes? 
+    Buff Wizard: “That is enough!!!!” 
+    The Buff Wizard pounds his fists into the cave wall. The floor trembles
+    <<set $murderMeter = $murderMeter + 1>>
+
+<<jump End>>
+===
+
+title: End
+tags:
+---
+<<if $murderMeter <= 0>>
+    Ha ha, the old kobalt charm! Another satisfied customer! Shame to let such a fine piece of merchandise go though…
+    -> Shankin Time
+        <<flow_message shiv>>
+    -> Let them walk past.
+        <<flow_message done>>
+    <<stop>>
+<<else>>
+Oh gosh he looks mad! What if he turns me into something gross? Like a human?!
+<<endif>>
+
+-> Offer Trade
+    <<flow_message trade>>
+    <<stop>>
+-> Shiv Time    
+    <<if dice(100) <= 20>>
+    Now how does the old saying go? Rock beats scissors, paper beats rock, shiv beats Wizard right?
+    <<flow_message shiv>>
+    <<else>>
+    Wow, I've never been cursed AND punched at the same time. Sucks.
+    <<flow_message dead>>
+    <<endif>>
+===
+
+title: Trade
+tags:
+---
+    <<if $preferredType == "Treasure">>
+    Buff Wizzard: 'Why, a fair exchange!' 
+    the Buff Wizards' eyes sparkle. You can tell he needed this. Like, maybe too much.
+    <<set $murderMeter = $murderMeter - 2>>
+    <<else>>
+    Buff Wizzard: Don't waste my time, you thumb! 
+    His eyebrows pull together, forming a woolly worm of anger.
+    <<set $murderMeter = $murderMeter + 2>>
+    <<endif>>
+
+    <<jump End>>
+===

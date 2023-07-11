@@ -5,7 +5,7 @@ using Random = Unity.Mathematics.Random;
 
 public static class CardShuffleSystem
 {
-    public static Stack<int> FisherYatesShuffle(Stack<int> deckStack, Random random)
+    public static Stack<int> FisherYatesShuffle(Stack<int> deckStack,ref Random random)
     {
         int[] deck = deckStack.ToArray();
         
