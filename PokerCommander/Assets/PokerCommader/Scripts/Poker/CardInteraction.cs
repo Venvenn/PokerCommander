@@ -53,4 +53,9 @@ public class TexasHoldemInteractionManager
         m_cardHand = new CardHand[m_cardHand.Length];
         m_cardTable = new CardTable(k_tableTotalCards);
     }
+
+    public void GetBestHand()
+    {
+        
+    }
 }

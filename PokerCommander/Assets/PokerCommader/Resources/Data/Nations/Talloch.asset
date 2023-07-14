@@ -19,7 +19,9 @@ MonoBehaviour:
     Allegiances:
       list:
       - Key: talloch
-        Value: 0
+        Value: 1
       - Key: zoldar
+        Value: 2
+      - Key: outlaws
         Value: 2
       keyCollision: 0

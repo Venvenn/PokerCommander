@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb1a4ca755e3ab14c9a0a8fe308f73cc, type: 3}
-  m_Name: Player
+  m_Name: BanditLeader
   m_EditorClassIdentifier: 
   CommanderData:
     Id:
-      Id: player
-    Name: Player
+      Id: bandit_leader
+    Name: Bandir Leader
     Icon: {fileID: 21300000, guid: 0ac55f9f886d827408c102bdf33c5ff7, type: 3}
     Rank:
-      Id: private
+      Id: captain
     Allegiance:
-      Id: player
+      Id: outlaws

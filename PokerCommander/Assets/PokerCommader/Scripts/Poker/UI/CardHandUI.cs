@@ -11,6 +11,8 @@ public class CardHandUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI m_characterName;
     [SerializeField]
+    private TextMeshProUGUI m_currencyText;
+    [SerializeField]
     private Image[] m_cards;
 
     private CardHand m_cardHand;
@@ -19,6 +21,11 @@ public class CardHandUI : MonoBehaviour
     {
         m_portrait.sprite = icon;
         m_characterName.text = characterName;
+    }
+    
+    public void SetCurrencyText(int currency)
+    {
+        m_currencyText.text = currency.ToString();
     }
     
     public void SeCards(CardHand cardHand, Sprite cardBack, bool show)

@@ -9,15 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb1a4ca755e3ab14c9a0a8fe308f73cc, type: 3}
+  m_Script: {fileID: 11500000, guid: d88d67237b10308498782d8e6ebe4054, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  CommanderData:
+  NationData:
     Id:
       Id: player
     Name: Player
-    Icon: {fileID: 21300000, guid: 0ac55f9f886d827408c102bdf33c5ff7, type: 3}
-    Rank:
-      Id: private
-    Allegiance:
-      Id: player
+    Allegiances:
+      list:
+      - Key: player
+        Value: 0
+      - Key: talloch
+        Value: 1
+      - Key: zoldar
+        Value: 2
+      - Key: outlaws
+        Value: 2
+      keyCollision: 0

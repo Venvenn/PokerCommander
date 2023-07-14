@@ -5,22 +5,24 @@ using UnityEngine;
 public struct CombatCommanderData
 {
     public CommanderData Data;
+    public int Currency;
+    
     public bool ActiveInRound;
     public BetState BetState;
+    public int BetThisRound;
 
-    public int Currency;
-
-    public bool ActiveInBet()
+    public bool ActiveInBet(int currentBet)
     {
         switch (BetState)
         {
             case BetState.In:
-            case BetState.Checked:
                 return true;
+            case BetState.Checked:
             case BetState.Bet:
-            case BetState.Folded:
-            case BetState.Raised:
             case BetState.Called:
+            case BetState.Raised:
+                return currentBet > BetThisRound;
+            case BetState.Folded:
             case BetState.Out:
                 return false;
         }

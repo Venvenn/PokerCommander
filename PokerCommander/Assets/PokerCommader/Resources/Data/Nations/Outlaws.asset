@@ -18,10 +18,10 @@ MonoBehaviour:
     Name: Outlaws
     Allegiances:
       list:
-      - Key:
-          Id: talloch
+      - Key: outlaws
+        Value: 1
+      - Key: talloch
         Value: 2
-      - Key:
-          Id: zoldar
+      - Key: zoldar
         Value: 2
       keyCollision: 0

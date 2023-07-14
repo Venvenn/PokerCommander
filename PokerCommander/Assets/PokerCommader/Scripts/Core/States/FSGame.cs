@@ -27,7 +27,7 @@ public class FSGame : FlowState
     {
         BattleData battleData = new BattleData()
         {
-            Participants = new[] {new StringId("player"), new StringId("sir_oslo")}
+            Participants = new[] {new StringId("player"), new StringId("sir_oslo"), new StringId("bandit_leader")}
         };
         
         m_gameplayStates.Push(new FSPokerBattle(m_gameContext, battleData));

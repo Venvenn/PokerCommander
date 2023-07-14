@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Siren;
+using TMPro;
 using UnityEngine;
 
 public class TexasHoldemPokerUI : FlowScreenUI
@@ -9,21 +10,22 @@ public class TexasHoldemPokerUI : FlowScreenUI
     private Transform[] m_handZones;
     
     [SerializeField]
+    private TextMeshProUGUI m_potValue;
+    
+    [SerializeField]
     private CardTableUI m_cardTable;
     
     [SerializeField]
     private CardHandUI m_handPrefab;
+    
+    public CommandZoneUI CommandZoneUI;
 
-    [SerializeField]
-    private CommandZoneUI m_commandZoneUi;
-    
-    
     private CardBack m_cardBack;
     private List<CardHandUI> m_cardHands = new List<CardHandUI>();
     
     public void InitUI(NationData playerNation, CombatCommanderData[] participants, CardBack cardBack)
     {
-        m_commandZoneUi.gameObject.SetActive(false);
+        CommandZoneUI.gameObject.SetActive(false);
         m_cardBack = cardBack;
         
         for (int i = 0; i < participants.Length; i++)
@@ -31,6 +33,8 @@ public class TexasHoldemPokerUI : FlowScreenUI
             AllegianceType allegianceType = playerNation.Allegiances[participants[i].Data.Allegiance.Id];
             SpawnHand((int)allegianceType, participants[i].Data);
         }
+        
+        SetPotCurrency(0);
     }
 
     public void SpawnHand(int spawnZone, CommanderData commanderData)
@@ -49,6 +53,16 @@ public class TexasHoldemPokerUI : FlowScreenUI
         }
     }
     
+    public void SetHandsCurrency(int id, int value)
+    {
+        m_cardHands[id].SetCurrencyText(value);
+    }
+    
+    public void SetPotCurrency(int value)
+    {
+        m_potValue.text = value.ToString();
+    }
+    
     public void SetCardsInTable(CardTable cardTable)
     {
         m_cardTable.SetCards(cardTable);
@@ -56,12 +70,12 @@ public class TexasHoldemPokerUI : FlowScreenUI
 
     public void EnableCommandZone()
     {
-        m_commandZoneUi.gameObject.SetActive(true);
+        CommandZoneUI.gameObject.SetActive(true);
     }
     
     public void DisableCommandZone()
     {
-        m_commandZoneUi.gameObject.SetActive(false);
+        CommandZoneUI.gameObject.SetActive(false);
     }
 
     public void Reset()
