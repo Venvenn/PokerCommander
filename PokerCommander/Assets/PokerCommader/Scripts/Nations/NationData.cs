@@ -1,6 +1,8 @@
 using System;
-using Siren;
 
+/// <summary>
+/// Data describing a nation in the game
+/// </summary>
 [Serializable]
 public struct NationData
 {

@@ -1,6 +1,9 @@
 using Siren;
 using UnityEngine;
 
+/// <summary>
+/// a manager responsible for instantiating and managing UI screens and elements. 
+/// </summary>
 public class UIManager
 {
     private RectTransform m_rootTransform;

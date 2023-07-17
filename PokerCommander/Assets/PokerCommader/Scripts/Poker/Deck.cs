@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A collection of Cards that can be shuffled into a random order. 
+/// </summary>
 public class Deck
 {
     private Stack<int> m_deck;
@@ -33,6 +36,9 @@ public class Deck
         m_discardPile.Push(id);
     }
     
+    /// <summary>
+    /// Draws a hand of cards from the deck.
+    /// </summary>
     public CardHand DrawHand(int handSize)
     {
         CardHand cardHand = new CardHand(handSize);
@@ -45,13 +51,15 @@ public class Deck
         return cardHand;
     }
 
+    /// <summary>
+    /// Shuffles the deck
+    /// </summary>
     public void ResetDeck()
     {
         m_deck = new Stack<int>(m_cardData.Length);
         m_discardPile = new Stack<int>();
         for (int i = 0; i < m_cardData.Length; i++)
         {
-            m_cardData[i].Id = i;
             m_deck.Push(i);
         }
         m_deck = CardShuffleSystem.FisherYatesShuffle(m_deck,ref m_random.Random);

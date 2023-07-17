@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/// <summary>
+/// An enum used to tell the current allegiance type of a character
+/// </summary>
 public enum AllegianceType
 {
     Neutral,

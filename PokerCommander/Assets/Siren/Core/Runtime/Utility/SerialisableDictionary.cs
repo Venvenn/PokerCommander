@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Generic Serializable Dictionary for Unity 2020.1 and above.
@@ -11,17 +12,23 @@ using System;
 public class SerialisableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
     // Internal
-    [SerializeField]
-    private List<KeyValuePair> list = new List<KeyValuePair>();
-    [SerializeField, HideInInspector]
-    private Dictionary<TKey, int> indexByKey = new Dictionary<TKey, int>();
-    [SerializeField, HideInInspector]
-    private Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
+    [FormerlySerializedAs("list")] [SerializeField]
+    private List<KeyValuePair> m_list = new List<KeyValuePair>();
+    [FormerlySerializedAs("indexByKey")] [SerializeField, HideInInspector]
+    private Dictionary<TKey, int> m_indexByKey;
+    [FormerlySerializedAs("dict")] [SerializeField, HideInInspector]
+    private Dictionary<TKey, TValue> m_dict;
 
     #pragma warning disable 0414
     [SerializeField, HideInInspector]
     private bool keyCollision;
     #pragma warning restore 0414
+
+    public SerialisableDictionary()
+    {
+        m_indexByKey = new Dictionary<TKey, int>();
+        m_dict = new Dictionary<TKey, TValue>();
+    }
 
     [Serializable]
     private struct KeyValuePair
@@ -41,16 +48,16 @@ public class SerialisableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, I
     // Populate dictionary with pairs from list and flag key-collisions.
     public void OnAfterDeserialize()
     {
-        dict.Clear();
-        indexByKey.Clear();
+        m_dict.Clear();
+        m_indexByKey.Clear();
         keyCollision = false;
-        for (int i = 0; i < list.Count; i++)
+        for (int i = 0; i < m_list.Count; i++)
         {
-            var key = list[i].Key;
+            var key = m_list[i].Key;
             if (key != null && !ContainsKey(key))
             {
-                dict.Add(key, list[i].Value);
-                indexByKey.Add(key, i);
+                m_dict.Add(key, m_list[i].Value);
+                m_indexByKey.Add(key, i);
             }
             else
             {
@@ -62,43 +69,43 @@ public class SerialisableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, I
     // IDictionary
     public TValue this[TKey key]
     {
-        get => dict[key];
+        get => m_dict[key];
         set
         {
-            dict[key] = value;
-            if (indexByKey.ContainsKey(key))
+            m_dict[key] = value;
+            if (m_indexByKey.ContainsKey(key))
             {
-                var index = indexByKey[key];
-                list[index] = new KeyValuePair(key, value);
+                var index = m_indexByKey[key];
+                m_list[index] = new KeyValuePair(key, value);
             }
             else
             {
-                list.Add(new KeyValuePair(key, value));
-                indexByKey.Add(key, list.Count - 1);
+                m_list.Add(new KeyValuePair(key, value));
+                m_indexByKey.Add(key, m_list.Count - 1);
             }
         }
     }
 
-    public ICollection<TKey> Keys => dict.Keys;
-    public ICollection<TValue> Values => dict.Values;
+    public ICollection<TKey> Keys => m_dict.Keys;
+    public ICollection<TValue> Values => m_dict.Values;
 
     public void Add(TKey key, TValue value)
     {
-        dict.Add(key, value);
-        list.Add(new KeyValuePair(key, value));
-        indexByKey.Add(key, list.Count - 1);
+        m_dict.Add(key, value);
+        m_list.Add(new KeyValuePair(key, value));
+        m_indexByKey.Add(key, m_list.Count - 1);
     }
 
-    public bool ContainsKey(TKey key) => dict.ContainsKey(key);
+    public bool ContainsKey(TKey key) => m_dict.ContainsKey(key);
 
     public bool Remove(TKey key) 
     {
-        if (dict.Remove(key))
+        if (m_dict.Remove(key))
         {
-            var index = indexByKey[key];
-            list.RemoveAt(index);
+            var index = m_indexByKey[key];
+            m_list.RemoveAt(index);
             UpdateIndexLookup(index);
-            indexByKey.Remove(key);
+            m_indexByKey.Remove(key);
             return true;
         }
         else
@@ -108,16 +115,16 @@ public class SerialisableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, I
     }
 
     private void UpdateIndexLookup(int removedIndex) {
-        for (int i = removedIndex; i < list.Count; i++) {
-            var key = list[i].Key;
-            indexByKey[key]--;
+        for (int i = removedIndex; i < m_list.Count; i++) {
+            var key = m_list[i].Key;
+            m_indexByKey[key]--;
         }
     }
 
-    public bool TryGetValue(TKey key, out TValue value) => dict.TryGetValue(key, out value);
+    public bool TryGetValue(TKey key, out TValue value) => m_dict.TryGetValue(key, out value);
 
     // ICollection
-    public int Count => dict.Count;
+    public int Count => m_dict.Count;
     public bool IsReadOnly { get; set; }
 
     public void Add(KeyValuePair<TKey, TValue> pair)
@@ -127,15 +134,15 @@ public class SerialisableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, I
 
     public void Clear()
     {
-        dict.Clear();
-        list.Clear();
-        indexByKey.Clear();
+        m_dict.Clear();
+        m_list.Clear();
+        m_indexByKey.Clear();
     }
 
     public bool Contains(KeyValuePair<TKey, TValue> pair)
     {
         TValue value;
-        if (dict.TryGetValue(pair.Key, out value))
+        if (m_dict.TryGetValue(pair.Key, out value))
         {
             return EqualityComparer<TValue>.Default.Equals(value, pair.Value);
         }
@@ -151,10 +158,10 @@ public class SerialisableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, I
             throw new ArgumentException("The array cannot be null.");
         if (arrayIndex < 0)
            throw new ArgumentOutOfRangeException("The starting array index cannot be negative.");
-        if (array.Length - arrayIndex < dict.Count)
+        if (array.Length - arrayIndex < m_dict.Count)
             throw new ArgumentException("The destination array has fewer elements than the collection.");
 
-        foreach (var pair in dict)
+        foreach (var pair in m_dict)
         {
             array[arrayIndex] = pair;
             arrayIndex++;
@@ -164,7 +171,7 @@ public class SerialisableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, I
     public bool Remove(KeyValuePair<TKey, TValue> pair)
     {
         TValue value;
-        if (dict.TryGetValue(pair.Key, out value))
+        if (m_dict.TryGetValue(pair.Key, out value))
         {
             bool valueMatch = EqualityComparer<TValue>.Default.Equals(value, pair.Value);
             if (valueMatch)
@@ -176,6 +183,6 @@ public class SerialisableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, I
     }
 
     // IEnumerable
-    public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => dict.GetEnumerator();
-    IEnumerator IEnumerable.GetEnumerator() => dict.GetEnumerator();
+    public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => m_dict.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => m_dict.GetEnumerator();
 }

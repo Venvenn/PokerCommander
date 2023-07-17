@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Static Data about a commander, loaded from SO
+/// </summary>
 [Serializable]
 public struct CommanderData
 {

@@ -1,6 +1,8 @@
 using System;
-using UnityEngine;
 
+/// <summary>
+/// Dynamic data describing a commander participant in a poker battle.
+/// </summary>
 [Serializable]
 public struct CombatCommanderData
 {

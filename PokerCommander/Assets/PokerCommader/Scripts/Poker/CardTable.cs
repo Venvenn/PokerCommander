@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// Data for cards dealt to the table
+/// </summary>
 public struct CardTable
 {
     private List<Card> m_cards;

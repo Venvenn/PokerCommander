@@ -1,8 +1,10 @@
 using Siren;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using Task = System.Threading.Tasks.Task;
 
+/// <summary>
+/// State responsible for running the flow of poker
+/// </summary>
 public class FSPokerBattle : FlowState
 {
     private const int k_startBlindValue = 1;
@@ -27,10 +29,8 @@ public class FSPokerBattle : FlowState
     private Pot m_pot;
     
     private int m_dealChipId = -1;
-    
     private int m_currentBetId = -1;
 
-    
     public FSPokerBattle(GameContext gameContext, BattleData battleData)
     {
         Debug.Assert(battleData.Participants != null && battleData.Participants.Length > 0, "Battle Has No Participants!");
@@ -87,7 +87,10 @@ public class FSPokerBattle : FlowState
         RunRoundPhase();
     }
 
-    public void RunRoundPhase()
+    /// <summary>
+    /// The poker round flow, must be called to progress, not updated.
+    /// </summary>
+    private void RunRoundPhase()
     {
         switch (m_currentPhase)
         {
@@ -119,9 +122,15 @@ public class FSPokerBattle : FlowState
             case PokerPhase.River:
                 m_texasHoldemInteractionManager.DealRiver();
                 m_ui.SetCardsInTable(m_texasHoldemInteractionManager.m_cardTable);
-                EnterBetPhase();
+                m_currentPhase++;
+                RunRoundPhase();
                 break;
             case PokerPhase.Reset:
+                var bestHand = m_texasHoldemInteractionManager.GetBestHand();
+                for (int i = 0; i < bestHand.Count; i++)
+                {
+                    Debug.Log($"Best Hand: {m_participants[bestHand[i]]}");
+                }
                 Reset();
                 RunRoundPhase();
                 break;
@@ -186,7 +195,7 @@ public class FSPokerBattle : FlowState
                         return;
                     }
                     RunAIBet(i);
-                    await Task.Delay(2000);
+                    await Task.Delay(1000);
                 }
                 
                 if (!wentRound && i + 1 >= j)

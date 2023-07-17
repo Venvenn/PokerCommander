@@ -1,5 +1,8 @@
 using Siren;
 
+/// <summary>
+/// Game director for kicking off the state machine, should do very little else
+/// </summary>
 public class GameDirector : Director
 {
     public override void OnStart()

@@ -3,6 +3,9 @@ using UnityEditor;
 using System;
 using System.IO;
 
+/// <summary>
+/// A tool used to edit dialogue scripts in engine 
+/// </summary>
 public class TextEditorTool : EditorWindow
 {
     private string m_text;

@@ -1,7 +1,10 @@
-﻿namespace SnapCall.Enums
+﻿/// <summary>
+/// All the Suits a card can have
+/// </summary>
+public enum Suit
 {
-	public enum Suit
-	{
-		Spades, Hearts, Diamonds, Clubs
-	}
+	Spades,
+	Hearts,
+	Diamonds,
+	Clubs
 }

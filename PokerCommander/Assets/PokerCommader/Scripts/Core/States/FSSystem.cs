@@ -1,6 +1,9 @@
 using Siren;
 using UnityEngine;
 
+/// <summary>
+/// Flowstate responsible for system level logic and application initialisation. 
+/// </summary>
 public class FSSystem : FlowState
 {
     private FlowStateMachine m_gameStates;

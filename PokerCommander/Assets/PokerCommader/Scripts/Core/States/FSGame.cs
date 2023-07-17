@@ -2,6 +2,9 @@ using Siren;
 using Unity.Mathematics;
 using UnityEngine;
 
+/// <summary>
+/// Flowstate responsible for running the Game Logic and managing sub states for game play
+/// </summary>
 public class FSGame : FlowState
 {
     private const int k_playerNum = 2;

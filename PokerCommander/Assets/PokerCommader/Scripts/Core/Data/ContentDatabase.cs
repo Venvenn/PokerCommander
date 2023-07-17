@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Simple database for storing unchanging data loaded from scitable objects
+/// </summary>
 public class ContentDatabase
 {
     public Dictionary<string, CommanderData> m_commanders;
