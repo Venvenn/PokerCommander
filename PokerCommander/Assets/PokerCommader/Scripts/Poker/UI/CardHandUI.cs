@@ -28,7 +28,7 @@ public class CardHandUI : MonoBehaviour
         m_currencyText.text = currency.ToString();
     }
     
-    public void SeCards(CardHand cardHand, Sprite cardBack, bool show)
+    public void SetCards(CardHand cardHand, Sprite cardBack, bool show)
     {
         m_cardHand = cardHand;
         for (int i = 0; i < cardHand.Cards.Length; i++)

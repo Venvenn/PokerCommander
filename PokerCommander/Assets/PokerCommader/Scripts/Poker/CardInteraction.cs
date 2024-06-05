@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using HoldemHand;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +12,7 @@ public class TexasHoldemInteractionManager
     private const int k_cardsInHand = 2;
     private const int k_flopSize = 3;
     private const int k_tableTotalCards = 5;
-    
+
     public CardHand[] m_cardHand;
     public CardTable m_cardTable;
     private Deck m_deck;
@@ -58,33 +61,36 @@ public class TexasHoldemInteractionManager
 
     public List<int> GetBestHand()
     {
-        int bestHandValue = int.MinValue;
+        uint bestHandValue = uint.MinValue;
         List<int> bestHandIds = new List<int>();
+        
+        //Get Table Card string
+        string tableString = string.Empty;
+        Card[] tableCards = m_cardTable.GetCards();
+        tableString = tableCards.Aggregate(tableString, (current, t) => current + $"{t.ToString()} ");
+        string description = string.Empty;;
         for (int i = 0; i < m_cardHand.Length; i++)
         {
-            Card[] tableCards = m_cardTable.GetCards();
-            CardHand combinedHand = new CardHand(m_cardHand[i].Cards.Length + tableCards.Length);
-
-            for (int j = 0; j < m_cardHand[i].Cards.Length; j++)
-            {
-                combinedHand.Cards[j] = m_cardHand[i].Cards[j];
-            }
-            for (int j = 0; j < tableCards.Length; j++)
-            {
-                combinedHand.Cards[j+m_cardHand[i].Cards.Length] = tableCards[j];
-            }
+            string pocketString = m_cardHand[i].Cards.Aggregate(string.Empty, (current, t) => current + $"{t.ToString()} ");
+            pocketString.Remove(pocketString.Length - 1);
             
-            int handValue = HandEvaluator.EvaluateHand(combinedHand, Application.persistentDataPath+"/cardTable.json", 2);
+            ulong handMask = Hand.ParseHand(tableString + pocketString);
+            uint handValue = Hand.Evaluate(handMask);
+
             if (handValue >= bestHandValue )
             {
-                if (handValue == bestHandValue)
+                if (handValue != bestHandValue)
                 {
-                    bestHandIds.Add(i);
+                    bestHandIds.Clear();
                 }
+                description = Hand.DescriptionFromMask(handMask);
+                bestHandIds.Add(i);
                 bestHandValue = handValue;
             }
         }
 
+        
+        Debug.Log(description);
         return bestHandIds;
     }
 }

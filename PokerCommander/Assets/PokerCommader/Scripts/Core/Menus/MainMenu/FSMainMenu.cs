@@ -27,18 +27,17 @@ public class FSMainMenu : FlowState
 
     private void NewGame()
     {
+        Scenario scenario = Resources.Load<Scenario>("Data/Scenarios/MainStory/MainStory");
         FlowStateMachine.Pop();
-        FlowStateMachine.Push(new FSGame(m_gameContext));
+        FlowStateMachine.Push(new FSGame(m_gameContext, scenario));
     }
     
     private void Continue()
     {
-        FlowStateMachine.Push(new FSGame(m_gameContext));
     }
     
     private void Settings()
     {
-        FlowStateMachine.Push(new FSGame(m_gameContext));
     }
 
     

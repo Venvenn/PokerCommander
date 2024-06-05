@@ -6,8 +6,8 @@ public struct Card : IEquatable<Card>
 {
     private static int[] s_rankPrimes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41 };
     private static int[] s_suitPrimes = { 43, 47, 53, 59 };
-    public static char[] s_ranks = "23456789TJQKA".ToCharArray();
-    public static char[] s_suits = "SHDC".ToCharArray();
+    public static char[] s_ranks = "23456789tjqka".ToCharArray();
+    public static char[] s_suits = "shdc".ToCharArray();
     
     public Sprite Sprite;
     public Rank Rank;
@@ -34,19 +34,19 @@ public struct Card : IEquatable<Card>
             case '7': rank = Rank.Seven; break;
             case '8': rank = Rank.Eight; break;
             case '9': rank = Rank.Nine; break;
-            case 'T': rank = Rank.Ten; break;
-            case 'J': rank = Rank.Jack; break;
-            case 'Q': rank = Rank.Queen; break;
-            case 'K': rank = Rank.King; break;
-            case 'A': rank = Rank.Ace; break;
+            case 't': rank = Rank.Ten; break;
+            case 'j': rank = Rank.Jack; break;
+            case 'q': rank = Rank.Queen; break;
+            case 'k': rank = Rank.King; break;
+            case 'a': rank = Rank.Ace; break;
             default: throw new ArgumentException("Card string rank not valid");
         }
         switch (chars[1])
         {
-            case 'S': suit = Suit.Spades; break;
-            case 'H': suit = Suit.Hearts; break;
-            case 'D': suit = Suit.Diamonds; break;
-            case 'C': suit = Suit.Clubs; break;
+            case 's': suit = Suit.Spades; break;
+            case 'h': suit = Suit.Hearts; break;
+            case 'd': suit = Suit.Diamonds; break;
+            case 'c': suit = Suit.Clubs; break;
             default: throw new ArgumentException("Card string suit not valid");
         }
         
@@ -79,8 +79,8 @@ public struct Card : IEquatable<Card>
     
     public override string ToString()  
     {
-        char[] ranks = "23456789TJQKA".ToCharArray();
-        char[] suits = { '♠', '♥', '♦', '♣' };
+        char[] ranks = "23456789tjqka".ToCharArray();
+        char[] suits = { 's', 'h', 'd', 'c' };
 
         return ranks[(int)Rank].ToString() + suits[(int)Suit].ToString();
     }

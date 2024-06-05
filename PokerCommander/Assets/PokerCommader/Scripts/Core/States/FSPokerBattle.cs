@@ -129,10 +129,9 @@ public class FSPokerBattle : FlowState
                 var bestHand = m_texasHoldemInteractionManager.GetBestHand();
                 for (int i = 0; i < bestHand.Count; i++)
                 {
-                    Debug.Log($"Best Hand: {m_participants[bestHand[i]]}");
+                    Debug.Log($"Best Hand: {m_participants[bestHand[i]].Data.Name}");
                 }
                 Reset();
-                RunRoundPhase();
                 break;
         }
         
@@ -140,6 +139,8 @@ public class FSPokerBattle : FlowState
 
     private async void Reset()
     {
+        m_ui.Reveal();
+        
         await Task.Delay(5000);
         
         m_deck.ResetDeck();
@@ -155,6 +156,7 @@ public class FSPokerBattle : FlowState
         
         m_texasHoldemInteractionManager.Reset();
         m_currentPhase = PokerPhase.DealHands;
+        RunRoundPhase();
     }
     
     

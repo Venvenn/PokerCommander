@@ -14,211 +14,158 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cards:
   - Sprite: {fileID: -191273217, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Two of Diamonds
-    Value: 2
-    Id: 0
+    Rank: 0
+    Suit: 2
   - Sprite: {fileID: 519991701, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Two of Hearts
-    Value: 2
-    Id: 1
+    Rank: 0
+    Suit: 1
   - Sprite: {fileID: 1356451500, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Two of Spades
-    Value: 2
-    Id: 2
+    Rank: 0
+    Suit: 0
   - Sprite: {fileID: -1195323175, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Two of Clubs
-    Value: 2
-    Id: 3
+    Rank: 0
+    Suit: 3
   - Sprite: {fileID: 385368694, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Three of Diamonds
-    Value: 3
-    Id: 4
+    Rank: 1
+    Suit: 2
   - Sprite: {fileID: 1322806399, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Three of Hearts
-    Value: 3
-    Id: 5
+    Rank: 1
+    Suit: 1
   - Sprite: {fileID: 1339313508, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Three of Spades
-    Value: 3
-    Id: 6
+    Rank: 1
+    Suit: 0
   - Sprite: {fileID: 1772105304, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Three of Clubs
-    Value: 3
-    Id: 7
+    Rank: 1
+    Suit: 3
   - Sprite: {fileID: 1055937648, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Four of Diamonds
-    Value: 4
-    Id: 8
+    Rank: 2
+    Suit: 2
   - Sprite: {fileID: -75456811, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Four of Hearts
-    Value: 4
-    Id: 9
+    Rank: 2
+    Suit: 1
   - Sprite: {fileID: 1673096310, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Four of Spades
-    Value: 4
-    Id: 10
+    Rank: 2
+    Suit: 0
   - Sprite: {fileID: -1501124594, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Four of Clubs
-    Value: 4
-    Id: 11
+    Rank: 2
+    Suit: 3
   - Sprite: {fileID: 249937542, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Five of Diamonds
-    Value: 5
-    Id: 12
+    Rank: 3
+    Suit: 2
   - Sprite: {fileID: 168279654, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Five of Hearts
-    Value: 5
-    Id: 13
+    Rank: 3
+    Suit: 1
   - Sprite: {fileID: -1364470980, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Five of Spades
-    Value: 5
-    Id: 14
+    Rank: 3
+    Suit: 0
   - Sprite: {fileID: 13045078, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Five of Clubs
-    Value: 5
-    Id: 15
+    Rank: 3
+    Suit: 3
   - Sprite: {fileID: 2014223812, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Six of Diamonds
-    Value: 6
-    Id: 16
+    Rank: 4
+    Suit: 2
   - Sprite: {fileID: 1463030556, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Six of Hearts
-    Value: 6
-    Id: 17
+    Rank: 4
+    Suit: 1
   - Sprite: {fileID: 1643446061, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Six of Spades
-    Value: 6
-    Id: 18
+    Rank: 4
+    Suit: 0
   - Sprite: {fileID: -446378294, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Six of Clubs
-    Value: 6
-    Id: 19
+    Rank: 4
+    Suit: 3
   - Sprite: {fileID: -1245502642, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Seven of Diamonds
-    Value: 7
-    Id: 20
+    Rank: 5
+    Suit: 2
   - Sprite: {fileID: 922076919, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Seven of Hearts
-    Value: 7
-    Id: 21
+    Rank: 5
+    Suit: 1
   - Sprite: {fileID: 768890481, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Seven of Clubs
-    Value: 7
-    Id: 22
+    Rank: 5
+    Suit: 3
   - Sprite: {fileID: -1726309767, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Seven of Spades
-    Value: 7
-    Id: 23
+    Rank: 5
+    Suit: 0
   - Sprite: {fileID: -1070167765, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Eight of Diamonds
-    Value: 8
-    Id: 24
+    Rank: 6
+    Suit: 2
   - Sprite: {fileID: 1318571228, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Eight of Hearts
-    Value: 8
-    Id: 25
+    Rank: 6
+    Suit: 1
   - Sprite: {fileID: 1396123639, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Eight of Clubs
-    Value: 8
-    Id: 26
+    Rank: 6
+    Suit: 3
   - Sprite: {fileID: 197750997, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Eight of Spades
-    Value: 8
-    Id: 27
+    Rank: 6
+    Suit: 0
   - Sprite: {fileID: 1026348554, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Nine of Diamonds
-    Value: 9
-    Id: 28
-  - Sprite: {fileID: 1026348554, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Nine of Hearts
-    Value: 9
-    Id: 29
+    Rank: 7
+    Suit: 2
+  - Sprite: {fileID: 911223577, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
+    Rank: 7
+    Suit: 1
   - Sprite: {fileID: -1557729644, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Nine of Clubs
-    Value: 9
-    Id: 30
+    Rank: 7
+    Suit: 3
   - Sprite: {fileID: -4476512, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Nine of Spades
-    Value: 9
-    Id: 31
+    Rank: 7
+    Suit: 0
   - Sprite: {fileID: 911280510, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Ten of Diamonds
-    Value: 10
-    Id: 32
+    Rank: 8
+    Suit: 2
   - Sprite: {fileID: -170443948, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Ten of Hearts
-    Value: 10
-    Id: 33
+    Rank: 8
+    Suit: 1
   - Sprite: {fileID: 2127782923, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Ten of Spades
-    Value: 10
-    Id: 34
+    Rank: 8
+    Suit: 0
   - Sprite: {fileID: -1556379255, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Ten of Clubs
-    Value: 10
-    Id: 35
+    Rank: 8
+    Suit: 3
   - Sprite: {fileID: -70769483, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Jack of Diamonds
-    Value: 11
-    Id: 36
+    Rank: 9
+    Suit: 2
   - Sprite: {fileID: 1896195306, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Jack of Hearts
-    Value: 11
-    Id: 37
+    Rank: 9
+    Suit: 1
   - Sprite: {fileID: -741326769, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Jack of Clubs
-    Value: 11
-    Id: 38
+    Rank: 9
+    Suit: 3
   - Sprite: {fileID: -1304226467, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Jack of Spades
-    Value: 11
-    Id: 39
+    Rank: 9
+    Suit: 0
   - Sprite: {fileID: 425647995, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Queen of Diamonds
-    Value: 12
-    Id: 40
+    Rank: 10
+    Suit: 2
   - Sprite: {fileID: 468768077, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Queen of Hearts
-    Value: 12
-    Id: 41
+    Rank: 10
+    Suit: 1
+  - Sprite: {fileID: 165530468, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
+    Rank: 10
+    Suit: 3
   - Sprite: {fileID: 923499423, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Queen of Clubs
-    Value: 12
-    Id: 42
-  - Sprite: {fileID: 1623698232, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Queen of Spades
-    Value: 12
-    Id: 43
+    Rank: 10
+    Suit: 0
   - Sprite: {fileID: 1982452230, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: King of Diamonds
-    Value: 13
-    Id: 44
+    Rank: 11
+    Suit: 2
   - Sprite: {fileID: -1242840480, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: King of Hearts
-    Value: 13
-    Id: 45
+    Rank: 11
+    Suit: 1
   - Sprite: {fileID: -130351065, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: King of Clubs
-    Value: 13
-    Id: 46
+    Rank: 11
+    Suit: 3
   - Sprite: {fileID: -1787203674, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: King of Spades
-    Value: 13
-    Id: 47
+    Rank: 11
+    Suit: 0
   - Sprite: {fileID: -1265628006, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Ace of Diamonds
-    Value: 14
-    Id: 48
+    Rank: 12
+    Suit: 2
   - Sprite: {fileID: 1155251774, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Ace of Hearts
-    Value: 14
-    Id: 49
+    Rank: 12
+    Suit: 1
   - Sprite: {fileID: -1198813512, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Ace of Clubs
-    Value: 14
-    Id: 50
+    Rank: 12
+    Suit: 3
   - Sprite: {fileID: 1598056975, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
-    Name: Ace of Spades
-    Value: 14
-    Id: 51
-  CardBack: {fileID: -863395422, guid: 3b07695adcd880c4dab2d201352eaedc, type: 3}
+    Rank: 12
+    Suit: 0

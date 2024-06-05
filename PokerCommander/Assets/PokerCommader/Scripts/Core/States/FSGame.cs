@@ -1,9 +1,8 @@
 using Siren;
-using Unity.Mathematics;
 using UnityEngine;
 
 /// <summary>
-/// Flowstate responsible for running the Game Logic and managing sub states for game play
+/// FlowState responsible for running the Game Logic and managing sub states for game play
 /// </summary>
 public class FSGame : FlowState
 {
@@ -12,12 +11,19 @@ public class FSGame : FlowState
     private GameUI m_ui;
     private GameContext m_gameContext;
     private FlowStateMachine m_gameplayStates;
+
+    //Scenario
+    private Scenario m_scenario;
+    private int m_actId = 0;
     
-    public FSGame(GameContext gameContext)
+    public FSGame(GameContext gameContext, Scenario scenario)
     {
         //UI
         m_gameContext = gameContext;
         m_gameplayStates = new FlowStateMachine(this);
+        
+        //Game
+        m_scenario = scenario;
     }
 
     public override void OnInitialise()
@@ -33,7 +39,7 @@ public class FSGame : FlowState
             Participants = new[] {new StringId("player"), new StringId("sir_oslo"), new StringId("bandit_leader")}
         };
         
-        m_gameplayStates.Push(new FSPokerBattle(m_gameContext, battleData));
+        m_gameplayStates.Push(new FSActStart(m_gameContext, m_scenario.Acts[m_actId]));
     }
     
     public override void ActiveUpdate()

@@ -3,7 +3,7 @@
 namespace Siren
 {
     /// <summary>
-    /// State machine that control the flow between states as well as what stage a state is in 
+    /// State machine that controls the flow between states as well as what stage a state is in 
     /// </summary>
     public partial class FlowStateMachine : BaseFlowStateMachine
     {
@@ -129,8 +129,10 @@ namespace Siren
                     case StackAction.POP:
                         if (m_stateStack.Count > 0)
                         {
-                            m_stateStack.Peek().OnDismiss();
-                            m_stateStack.Peek().m_stage = FlowState.StateStage.DISMISSING;
+                            FlowState state = m_stateStack.Peek();
+                            state.OnInactive();
+                            state.OnDismiss();
+                            state.m_stage = FlowState.StateStage.DISMISSING;
                         }
                         break;
                     case StackAction.PUSH:
@@ -165,7 +167,6 @@ namespace Siren
         {
             if (m_stateStack.Count > 0)
             {
-                m_stateStack.Peek().OnInactive();
                 m_stateStack.Pop();
 
                 if (m_stateStack.Count > 0)

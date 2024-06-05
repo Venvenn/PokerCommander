@@ -49,7 +49,7 @@ public class TexasHoldemPokerUI : FlowScreenUI
     {
         for (int i = 0; i < cardHand.Length; i++)
         {
-            m_cardHands[i].SeCards(cardHand[i], m_cardBack.CardBackSprite, i == 0);
+            m_cardHands[i].SetCards(cardHand[i], m_cardBack.CardBackSprite, i == 0);
         }
     }
     
@@ -78,6 +78,15 @@ public class TexasHoldemPokerUI : FlowScreenUI
         CommandZoneUI.gameObject.SetActive(false);
     }
 
+    public void Reveal()
+    {
+        for (int i = 0; i < m_cardHands.Count; i++)
+        {
+            m_cardHands[i].Reveal();
+        }
+    }
+
+    
     public void Reset()
     {
         m_cardTable.ClearTable();

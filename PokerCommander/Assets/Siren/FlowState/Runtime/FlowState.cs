@@ -42,7 +42,6 @@ namespace Siren
         /// <summary>
         /// called every tick until TransitionState.COMPLETED is returned, things like loading and transitions can be done here 
         /// </summary>
-        /// <returns></returns>
         public virtual TransitionState UpdateInitialise()
         {
             return TransitionState.COMPLETED;
