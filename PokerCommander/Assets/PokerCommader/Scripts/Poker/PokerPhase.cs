@@ -7,5 +7,5 @@ public enum PokerPhase
     Flop,
     Turn,
     River,
-    Reset,
+    Reveal,
 }

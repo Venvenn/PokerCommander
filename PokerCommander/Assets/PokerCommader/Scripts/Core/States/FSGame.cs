@@ -39,7 +39,7 @@ public class FSGame : FlowState
             Participants = new[] {new StringId("player"), new StringId("sir_oslo"), new StringId("bandit_leader")}
         };
         
-        m_gameplayStates.Push(new FSActStart(m_gameContext, m_scenario.Acts[m_actId]));
+        FlowStateMachine.Push(new FSPokerBattle(m_gameContext, battleData));
     }
     
     public override void ActiveUpdate()
